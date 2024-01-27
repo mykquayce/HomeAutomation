@@ -1,0 +1,14 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+@scheme = http
+@hostname = localhost
+@port = 5114
+@host = {{scheme}}://{{hostname}}:{{port}}
+
+###
+
+PUT {{host}}/amp/power/toggle
+
+###
+
+PUT {{host}}/amp/power/toggle
