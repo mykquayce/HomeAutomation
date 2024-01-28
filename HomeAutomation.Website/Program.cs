@@ -1,6 +1,13 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services
+	.AddHttpClient<HomeAutomation.Clients.IBackendClient, HomeAutomation.Clients.Concrete.BackendClient>(client =>
+	{
+		client.BaseAddress = new Uri("https://homeautomation:7016");
+	})
+	.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false, });
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
