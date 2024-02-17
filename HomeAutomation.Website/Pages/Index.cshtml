@@ -9,5 +9,7 @@
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 <form method="post">
-    <input type="submit" value="amp power toggle" />
+    <button asp-page-handler="AmpPowerToggle">Amp Power Toggle</button>
+    <button asp-page-handler="NanoleafPowerOff">Nanoleaf Power Off</button>
+    <button asp-page-handler="NanoleafPowerOn">Nanoleaf Power On</button>
 </form>
