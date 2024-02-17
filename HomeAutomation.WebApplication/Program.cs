@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddGlobalCache(builder.Configuration.GetSection("amp"), builder.Configuration.GetSection("amp:messages"));
+builder.Services.AddNanoleaf(builder.Configuration.GetSection("nanoleaf"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
