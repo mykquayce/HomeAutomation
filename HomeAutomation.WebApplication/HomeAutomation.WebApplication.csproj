@@ -10,7 +10,11 @@
   <ItemGroup>
     <PackageReference Include="Helpers.GlobalCache" Version="2.0.0" />
     <PackageReference Include="Helpers.Nanoleaf" Version="1.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HomeAutomation.Clients\HomeAutomation.Clients.csproj" />
   </ItemGroup>
 
 </Project>
