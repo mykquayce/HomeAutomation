@@ -1,6 +1,14 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services
+	.AddHttpClient<HomeAutomation.Clients.IBackendClient, HomeAutomation.Clients.Concrete.BackendClient>(client =>
+	{
+		var uriString = builder.Configuration["Backend"] ?? throw new KeyNotFoundException("backend");
+		client.BaseAddress = new Uri(uriString);
+	})
+	.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false, });
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

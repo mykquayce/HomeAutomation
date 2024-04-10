@@ -9,8 +9,8 @@
       "applicationUrl": "https://homeautomation:7016",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_Kestrel__Certificates__Default__KeyPath": "%userprofile%\\.aspnet\\https\\homeautomation.key",
-        "ASPNETCORE_Kestrel__Certificates__Default__Path": "%userprofile%\\.aspnet\\https\\homeautomation.crt"
+        "ASPNETCORE_Kestrel__Certificates__Default__KeyPath": "%userprofile%\\.aspnet\\https\\localhost.key",
+        "ASPNETCORE_Kestrel__Certificates__Default__Path": "%userprofile%\\.aspnet\\https\\localhost.crt"
       }
     }
   }
