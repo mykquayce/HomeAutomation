@@ -42,6 +42,6 @@ secrets:
   ca.crt:
     file: ${USERPROFILE}\.aspnet\https\ca.crt
   localhost.crt:
-    file: ${USERPROFILE}\.aspnet\https\homeautomation.crt
+    file: ${USERPROFILE}\.aspnet\https\localhost.crt
   localhost.key:
-    file: ${USERPROFILE}\.aspnet\https\homeautomation.key
+    file: ${USERPROFILE}\.aspnet\https\localhost.key

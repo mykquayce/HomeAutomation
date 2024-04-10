@@ -11,7 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeAutomation.Website", "H
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeAutomation.Clients", "HomeAutomation.Clients\HomeAutomation.Clients.csproj", "{B720005D-9FB5-4393-AB5C-DB0FF8DAFD38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeAutomation.Models", "HomeAutomation.Models\HomeAutomation.Models.csproj", "{3AEA6744-47C7-49AB-A7BD-9BD8AB59ABC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeAutomation.Models", "HomeAutomation.Models\HomeAutomation.Models.csproj", "{3AEA6744-47C7-49AB-A7BD-9BD8AB59ABC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{809BACF2-C6D3-47D8-82BD-103650E37927}"
+	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
+		deploy.ps1 = deploy.ps1
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
