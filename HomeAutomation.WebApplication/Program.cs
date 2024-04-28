@@ -14,7 +14,7 @@ builder.Services.AddMemoryCache();
 builder.Services
 	.AddTransient<HttpMessageHandler>(_ => new HttpClientHandler { AllowAutoRedirect = false, })
 	.AddTransient<CachingHandler>()
-	.AddHttpClient<IdentityServerDelegatingHandler>((provider, client)=>
+	.AddHttpClient<IdentityServerDelegatingHandler>((provider, client) =>
 	{
 		var config = provider.GetRequiredService<IOptions<IdentityServerDelegatingHandler.Config>>().Value;
 		client.BaseAddress = config.Authority.GetBaseAddress();
@@ -29,15 +29,18 @@ builder.Services
 	.Configure<Helpers.GlobalCache.Config>(builder.Configuration.GetSection("amp"))
 	.Configure<Helpers.GlobalCache.Models.MessagesDictionary>(builder.Configuration.GetSection("amp:messages"))
 	.Configure<IdentityServerDelegatingHandler.Config>(builder.Configuration.GetSection("IdentityServer"))
-	.Configure<Helpers.Nanoleaf.Config>(builder.Configuration.GetSection("Nanoleaf"))
 	.Configure<HomeAutomation.Models.NetworkDiscoveryConfig>(builder.Configuration.GetSection("NetworkDiscovery"));
 
 // nanoleaf client
 builder.Services
-	.AddHttpClient<Helpers.Nanoleaf.IClient, Helpers.Nanoleaf.Concrete.Client>("NanoleafClient", (provider, client) =>
+	.AddNanoleaf(b =>
 	{
-		var config = provider.GetRequiredService<IOptions<Helpers.Nanoleaf.Config>>().Value;
-		client.BaseAddress = config.BaseAddress;
+		b.Token = g("Nanoleaf:Token") ?? throw new Exception();
+		b.BaseAddress = Uri.TryCreate(g("Nanoleaf:BaseAddress"), UriKind.Absolute, out var uri)
+			? uri
+			: throw new Exception();
+
+		string g(string key) => builder.Configuration[key] ?? throw new Exception(key + " config missing");
 	})
 	.ConfigurePrimaryHttpMessageHandler<HttpMessageHandler>()
 	.AddHttpMessageHandler<PhysicalAddressResolver>();
