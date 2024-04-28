@@ -13,11 +13,16 @@ builder.Services.AddMemoryCache();
 // delegating handlers
 builder.Services
 	.AddTransient<HttpMessageHandler>(_ => new HttpClientHandler { AllowAutoRedirect = false, })
+	.AddCachingHandler(c => c.Expiration = TimeSpan.FromHours(.9))
 	.AddTransient<CachingHandler>()
-	.AddHttpClient<IdentityServerDelegatingHandler>((provider, client) =>
+	.AddIdentityServerHandler(c =>
 	{
-		var config = provider.GetRequiredService<IOptions<IdentityServerDelegatingHandler.Config>>().Value;
-		client.BaseAddress = config.Authority.GetBaseAddress();
+		c.Authority = new Uri(g("IdentityServer:Authority"));
+		c.ClientId = g("IdentityServer:ClientId");
+		c.ClientSecret = g("IdentityServer:ClientSecret");
+		c.Scope = g("IdentityServer:Scope");
+
+		string g(string key) => builder.Configuration[key] ?? throw new Exception(key + " config missing");
 	})
 		.ConfigurePrimaryHttpMessageHandler<HttpMessageHandler>()
 		.AddHttpMessageHandler<CachingHandler>()
@@ -28,7 +33,6 @@ builder.Services
 builder.Services
 	.Configure<Helpers.GlobalCache.Config>(builder.Configuration.GetSection("amp"))
 	.Configure<Helpers.GlobalCache.Models.MessagesDictionary>(builder.Configuration.GetSection("amp:messages"))
-	.Configure<IdentityServerDelegatingHandler.Config>(builder.Configuration.GetSection("IdentityServer"))
 	.Configure<HomeAutomation.Models.NetworkDiscoveryConfig>(builder.Configuration.GetSection("NetworkDiscovery"));
 
 // nanoleaf client
@@ -54,7 +58,7 @@ builder.Services
 	})
 	.ConfigurePrimaryHttpMessageHandler<HttpMessageHandler>()
 	.AddHttpMessageHandler<CachingHandler>()
-	.AddHttpMessageHandler<IdentityServerDelegatingHandler>();
+	.AddHttpMessageHandler<IdentityServerHandler>();
 
 // global cache client
 builder.Services
