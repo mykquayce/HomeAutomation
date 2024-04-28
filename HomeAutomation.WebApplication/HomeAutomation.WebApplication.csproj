@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Helpers.DelegatingHandlers" Version="1.1.0" />
+    <PackageReference Include="Helpers.DelegatingHandlers" Version="1.1.1" />
     <PackageReference Include="Helpers.GlobalCache" Version="2.0.0" />
     <PackageReference Include="Helpers.Nanoleaf" Version="1.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
